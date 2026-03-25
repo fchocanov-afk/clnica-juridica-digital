@@ -1,13 +1,11 @@
 const heroSlides = Array.from(document.querySelectorAll(".hero-slide"));
 const heroDots = Array.from(document.querySelectorAll(".hero .dot"));
-const testimonialSlides = Array.from(document.querySelectorAll(".testimonial"));
-const testimonialDots = Array.from(document.querySelectorAll(".testimonial-dot"));
 const menuToggle = document.querySelector(".menu-toggle");
 const mobileNav = document.querySelector(".mobile-nav");
 const navGroups = Array.from(document.querySelectorAll(".nav-group"));
+const revealItems = Array.from(document.querySelectorAll(".intro-layout, .news-card, .panel"));
 
 let heroIndex = 0;
-let testimonialIndex = 0;
 
 function activateSlide(items, dots, nextIndex, activeClass = "is-active") {
   items.forEach((item, index) => {
@@ -24,26 +22,13 @@ function showHero(nextIndex) {
   activateSlide(heroSlides, heroDots, heroIndex);
 }
 
-function showTestimonial(nextIndex) {
-  testimonialIndex = nextIndex;
-  activateSlide(testimonialSlides, testimonialDots, testimonialIndex);
-}
-
 heroDots.forEach((dot, index) => {
   dot.addEventListener("click", () => showHero(index));
-});
-
-testimonialDots.forEach((dot, index) => {
-  dot.addEventListener("click", () => showTestimonial(index));
 });
 
 setInterval(() => {
   showHero((heroIndex + 1) % heroSlides.length);
 }, 5000);
-
-setInterval(() => {
-  showTestimonial((testimonialIndex + 1) % testimonialSlides.length);
-}, 7000);
 
 menuToggle?.addEventListener("click", () => {
   const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
@@ -83,3 +68,21 @@ document.addEventListener("click", (event) => {
     closeDropdowns(null);
   }
 });
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.18,
+      rootMargin: "0px 0px -40px 0px",
+    }
+  );
+
+  revealItems.forEach((item) => observer.observe(item));
+}
