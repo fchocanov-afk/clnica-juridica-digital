@@ -1,5 +1,4 @@
 {
-  "buildCommand": "./scripts/build.sh",
+  "buildCommand": "bash ./scripts/build.sh",
   "outputDirectory": "dist"
 }
-
