@@ -723,26 +723,36 @@ button {
 
 .staff-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(620px, 1fr));
+  gap: 32px;
+}
+
+.team-shell {
+  margin-top: -58px;
+}
+
+.team-container {
+  width: min(1480px, calc(100vw - 56px));
+  max-width: none;
+  padding: 48px;
 }
 
 .staff-card {
   display: grid;
-  grid-template-columns: 240px minmax(0, 1fr);
-  gap: 22px;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 28px;
   align-items: start;
   min-height: 100%;
-  padding: 24px;
+  padding: 28px;
   border: 1px solid rgba(22, 34, 55, 0.1);
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.78);
 }
 
 .staff-photo {
   overflow: hidden;
   border-radius: 26px;
   background: linear-gradient(180deg, #edf1f6, #dbe3ee);
-  aspect-ratio: 1 / 1.1;
+  aspect-ratio: 1 / 0.92;
 }
 
 .staff-photo img {
@@ -753,28 +763,30 @@ button {
 
 .staff-body {
   display: grid;
-  gap: 14px;
+  gap: 16px;
   align-content: start;
+  padding-top: 4px;
 }
 
 .staff-body h2 {
   margin: 0;
   color: #a12f28;
   font-size: clamp(1.6rem, 2.4vw, 2.15rem);
-  line-height: 1.02;
+  line-height: 1.06;
   letter-spacing: -0.04em;
 }
 
 .staff-title {
   margin: 0;
   color: var(--navy);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
 }
 
 .staff-body p {
   margin: 0;
-  line-height: 1.72;
+  line-height: 1.82;
+  max-width: 62ch;
 }
 
 .footer-grid {
@@ -861,6 +873,11 @@ button {
 
   .staff-photo {
     max-width: 280px;
+  }
+
+  .team-container {
+    width: min(100vw - 28px, 1480px);
+    padding: 32px 28px;
   }
 }
 
